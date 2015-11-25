@@ -14,6 +14,15 @@ router.get('/', function(req, res){
   })
 })
 
+// router.get('/:id', function(req, res){
+//   var id = req.params.id;
+//   tag.findById(id, function(err,data){
+//     if (err) return (err);
+//     // console.log(data)
+//     res.send(data);
+//   })
+// })
+
 router.post('/', function(req, res){
   var newTag = new tag(req.body);
   newTag.save( function(err, tag){
@@ -35,6 +44,5 @@ router.delete('/', function(req, res){
     res.send('deleted');
   })
 })
-
 
 module.exports = router;

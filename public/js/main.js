@@ -19,28 +19,33 @@ myapp.config(function($stateProvider, $urlRouterProvider){
         url: "/tags",
         templateUrl: "tags.html",
         controller: "tagCtrl"
+    })
+    .state('new', {
+      url: "/new",
+      templateUrl: "new.html",
+      controller: "tagCtrl"
     });
 });
 
-myapp.controller('addCtrl', function ($scope, $http){
-  $scope.addLink = function (){
-    console.log('kk');
-  }
-})
-
-myapp.controller('tagCtrl', function($scope, $http, tagService){
+myapp.controller('tagCtrl', function($scope, $http){
   $http.get('/tag').then(function (resp){
     tagService.saveTags(resp);
     $scope.tags = tagService.getTags();
-  })
+  });
+  $scope.submit = function(x, y, z){
+    var link = {name: x, url: y, tags: z}
+    $http.post('/link', link).then(function (resp){
+      $scope.finish = resp.data; 
+    })   
+  };
 })
 
 myapp.controller('LinkCtrl', function($scope, $http, linkService){
   $http.get('/link').then(function (resp){
     linkService.saveLinks(resp);
     $scope.links = linkService.getLink();
-  })
-})
+  });  
+});
 
 myapp.service('tagService', function (){
   var tags = {};
