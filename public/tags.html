@@ -1,4 +1,6 @@
 <div>
   <h2>Tags</h2>
-  <ul></ul>
+  <ul>
+    <li ng-repeat="(key,tag) in tags"><a data-id="{{key}}" href="#">{{tag.name}}</a><span class="badge">{{tag.links.length}}</span></li>
+  </ul>
 </div>

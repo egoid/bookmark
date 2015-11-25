@@ -14,20 +14,19 @@ let linkSchema = mongoose.Schema({
  });
 
 linkSchema.post('save', function(next){
-  // console.log(this.tags);
-  // this.model('tag').find({_id: {$in: this.tags}}, function (err, d){
-  //   if (err) console.log(err);
-  //   console.log(d);
+  // var id = this._id;
+  // this.tags.forEach(function(x){
+  //   tag.findByIdAndUpdate(x, {links: id}, function(err, data){
+  //     if (err) return (err);
+  //   })
   // })
-  var id = this._id;
-  this.tags.forEach(function(x){
-    tag.findByIdAndUpdate(x, {links: id}, function(err, data){
-      if (err) return (err);
-    })
-  })
-  next;
-  // this.model('tag').update({_id: {$in: this.tags}}, {$push: {links: this._id}, next } );
-  // console.log(typeof(this.tags))
+  // next;
+  this.model('tag').update({_id: {$in: this.tags}}, { $push: {links: this._id} }, function (err, results){
+    if (err) {console.log(err);}
+    else{
+      console.log(results);
+    }
+  });
 })
 
 Link = mongoose.model('Link', linkSchema);

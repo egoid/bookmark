@@ -5,9 +5,12 @@ let router = express.Router();
 let tag = require('../models/tag')
 
 router.get('/', function(req, res){
-  tag.find({}, function(err,data){
+  tag.find({}, function(err,tags){
     if (err) return (err);
-  res.send(data);
+    tag.populate(tags, {path:'links'}, function (err, done){
+      if(err) return console.log(err)
+      res.send(done);
+    })
   })
 })
 
