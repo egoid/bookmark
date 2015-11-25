@@ -1,4 +1,10 @@
 <h2>Bookmarked Links</h2>
-  <ul>
-    <li ng-repeat="link in links">{{link.name}}</li>
+  <ul> 
+    <li ng-repeat="link in links">
+      <h5>{{link.name}} @ <a href=#> {{link.url}} </a> </h5>
+      <span ng-repeat='ref in link.tags'>  
+        <a ui-sref='tags'>#{{ref.name}}</a> </span>
+        <hr>
+    </li>
+
   </ul>
