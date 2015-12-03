@@ -27,7 +27,7 @@ router.post('/', function(req, res){
   var newTag = new tag(req.body);
   newTag.save( function(err, tag){
     if (err) return (err);
-    res.send(tag._id);
+    res.send(tag);
   });
 });
 
@@ -38,10 +38,11 @@ router.put('/', function(req,res){
   })
 });
 
-router.delete('/', function(req, res){
-  tag.findByIdAndRemove(req.body._id, function(err, del){
+router.delete('/:id', function(req, res){
+  var path = req.path.slice(1);
+  tag.findByIdAndRemove(path, function(err, del){
     if (err) return (err);
-    res.send('deleted');
+    res.send(del._id);
   })
 })
 

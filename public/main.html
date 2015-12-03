@@ -1,10 +1,16 @@
 <h2>Bookmarked Links</h2>
-  <ul> 
-    <li ng-repeat="link in links">
-      <h5>{{link.name}} @ <a href=#> {{link.url}} </a> </h5>
-      <span ng-repeat='ref in link.tags'>  
-        <a ui-sref='tags'>#{{ref.name}}</a> </span>
-        <hr>
-    </li>
+<ul> 
+  <li ng-repeat="link in links" ng-if="deleted!==link._id">
+    <h5>{{link.name}} @ 
+      <a href="http://{{link.url}}"> {{link.url}} </a>
+      <a ng-click='del(link._id)'>
+        <span class='glyphicon glyphicon-trash'>  </span> 
+      </a> 
+    </h5>
+    <span class="badge" ng-repeat='ref in link.tags'>  
+      <a style ="color:white" ui-sref='aTag({id:ref._id})'>{{ref.name}}</a> 
+    </span>
+      <hr>
+  </li>
 
-  </ul>
+</ul>

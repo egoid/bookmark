@@ -1,25 +1,18 @@
 <h2>Add a New Bookmark</h2>
-    {{finish}}
-  <br>
-  <br>
-  <input type='text' placeholder='bookmark title' ng-model='name'> 
-  <input type='text' placeholder='your url' ng-model='url'>  
+<br>
+<span>Available Tags:</span>
+<span ng-repeat='(key,tag) in tags'>
+  <span class="badge cursorBadge click-{{tag.click}}" ng-click="clicked(key)">{{tag.name}}</span> 
+</span>
+<hr>
+<div class="form-inline">
+  <label for="title">Link Title: </label>
+  <input id="title" type='text' placeholder='bookmark title' ng-model='name' class="form-control"> 
+  <label for="link">Url: </label>
+  <input id="link" type='text' placeholder='your url' ng-model='url' class='form-control'>  
+</div>
+<hr>
 
-  <p>
-  <br>
-    <textarea placeholder='type in your tags here, separated by spaces' ng-model="list" ng-list="&#32;" ng-trim="false">asdf</textarea>
+<button class = "btn btn-default" ng-click='postLink(name, url, tags)'>Submit</button>
   
-  <p>for testing purposes: 
-    <pre>{{ list }}</pre>
-
-  <a ng-click='submit(name, url, list)'>submit</a>
-
-
-<script>
-function() {
-  var listInput = element(by.model('list'));
-  var output = element(by.binding('list | array'));
-  listInput.sendKeys('abc\ndef\nghi');
-  expect(output.getText()).toContain('[\n  "abc",\n  "def",\n  "ghi"\n]');
-});
-</script>
+</div>

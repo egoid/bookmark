@@ -1,0 +1,6 @@
+<div>
+  <h2 ng-keypress="checkEnter($event, tag._id)" ng-Dblclick="setEditable(tag._id)">{{tag.name}}</h2>
+  <ul>
+    <li ng-repeat="link in tag.links">{{link.name}}@ <a href="http://{{link.url}}">{{link.url}}</a></li>
+  </ul>
+</div>

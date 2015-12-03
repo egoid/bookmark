@@ -1,6 +1,12 @@
 <div>
   <h2>Tags</h2>
   <ul>
-    <li ng-repeat="(key,tag) in tags"><a data-id="{{key}}" href="#">{{tag.name}}</a><span class="badge">{{tag.links.length}}</span></li>
+    <li ng-repeat="(key,tag) in tags" ng-if="deleted!==key">
+      <a ui-sref="aTag({id:key})">{{tag.name}}</a>
+      <span class="badge">{{tag.links.length}}</span> 
+      <a ng-click='del(key)' ng-hide="{{tag.links.length}}">
+        <span class='glyphicon glyphicon-trash'></span> 
+      </a> 
+    </li>
   </ul>
 </div>

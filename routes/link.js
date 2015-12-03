@@ -17,31 +17,20 @@ router.post('/', function(req, res) {
   var newLink = new link({name: req.body.name , url: req.body.url})
   // begin tag populating and ref pushing
   if (req.body.tags){
-    var links = req.body.tags
-    var tagArr = [];
-    links.forEach(function(x,i,arr){
-      tag.find({name: x}, function (err, tag){
-        console.log(tag)
-        if (err) return (err);
-        if (tag.length === 0) {res.send('Looks like #' + x + ' is not an existing tag....try to add one?');
-                                return(err)}
-        // ^^^^^ error checking. If tag doesnt exist.                        
-        newLink.tags.push(tag[0]._id)
-        if (i == arr.length-1){
-           newLink.save( function(err, data) {
-            if (err) return(err);
-            res.send('complete');
-           });
-        }
-      })
-    })
+    newLink.tags = req.body.tags;
   }
+  newLink.save( function(err, data) {
+    if (err) return(err);
+    res.send(data);
+  });
+  
 });
 
-router.delete('/', function(req, res){
-  link.findByIdAndRemove(req.body._id, function(err, cool){
+router.delete('/:id', function(req, res){
+  var path = req.path.slice(1);
+  link.findByIdAndRemove(path, function(err, cool){
     if (err) return (err);
-    res.send('deleted');
+    res.send(cool._id);
   });
 })
 
